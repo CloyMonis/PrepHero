@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1DA579A529D84FB100114081 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA579A429D84FB100114081 /* ResultViewController.swift */; };
+		1DA579A829D8595900114081 /* SelectDateCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA579A629D8595900114081 /* SelectDateCollectionCell.swift */; };
+		1DA579A929D8595900114081 /* SelectDateCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DA579A729D8595900114081 /* SelectDateCollectionCell.xib */; };
+		1DA579AF29D85BAA00114081 /* SelectSubscriptionCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA579AD29D85BAA00114081 /* SelectSubscriptionCollectionCell.swift */; };
+		1DA579B029D85BAA00114081 /* SelectSubscriptionCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DA579AE29D85BAA00114081 /* SelectSubscriptionCollectionCell.xib */; };
 		7A4BBD96EE08CED2381C329D /* Pods_PrepHero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB46B20033EA0906B9EF7D49 /* Pods_PrepHero.framework */; };
 		9A525BC529C5849100A03FDD /* RPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A525BC429C5849100A03FDD /* RPicker.swift */; };
 		9A80E61829BEE30F00CE13A3 /* ViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A80E61729BEE30F00CE13A3 /* ViewControllerPresenter.swift */; };
@@ -52,6 +57,11 @@
 
 /* Begin PBXFileReference section */
 		0710FB961EDC2C5CE0458E01 /* Pods-PrepHero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PrepHero.debug.xcconfig"; path = "Target Support Files/Pods-PrepHero/Pods-PrepHero.debug.xcconfig"; sourceTree = "<group>"; };
+		1DA579A429D84FB100114081 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		1DA579A629D8595900114081 /* SelectDateCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateCollectionCell.swift; sourceTree = "<group>"; };
+		1DA579A729D8595900114081 /* SelectDateCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectDateCollectionCell.xib; sourceTree = "<group>"; };
+		1DA579AD29D85BAA00114081 /* SelectSubscriptionCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSubscriptionCollectionCell.swift; sourceTree = "<group>"; };
+		1DA579AE29D85BAA00114081 /* SelectSubscriptionCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectSubscriptionCollectionCell.xib; sourceTree = "<group>"; };
 		9A525BC429C5849100A03FDD /* RPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPicker.swift; sourceTree = "<group>"; };
 		9A80E61729BEE30F00CE13A3 /* ViewControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerPresenter.swift; sourceTree = "<group>"; };
 		9A80E61929BEFDBD00CE13A3 /* PrepUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepUserInfo.swift; sourceTree = "<group>"; };
@@ -118,6 +128,33 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		1DA579AA29D8595F00114081 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1DA579AB29D8597200114081 /* SelectDate */,
+				1DA579AC29D85B8500114081 /* SelectSubscription */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		1DA579AB29D8597200114081 /* SelectDate */ = {
+			isa = PBXGroup;
+			children = (
+				1DA579A629D8595900114081 /* SelectDateCollectionCell.swift */,
+				1DA579A729D8595900114081 /* SelectDateCollectionCell.xib */,
+			);
+			path = SelectDate;
+			sourceTree = "<group>";
+		};
+		1DA579AC29D85B8500114081 /* SelectSubscription */ = {
+			isa = PBXGroup;
+			children = (
+				1DA579AD29D85BAA00114081 /* SelectSubscriptionCollectionCell.swift */,
+				1DA579AE29D85BAA00114081 /* SelectSubscriptionCollectionCell.xib */,
+			);
+			path = SelectSubscription;
+			sourceTree = "<group>";
+		};
 		72D006A4C5E86A28361643FF /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +203,7 @@
 		B91C4220299FA25200EB5E91 /* UserSetupScreen */ = {
 			isa = PBXGroup;
 			children = (
+				1DA579AA29D8595F00114081 /* Cells */,
 				B91C4221299FA2AB00EB5E91 /* CreateAccountViewController.swift */,
 				B91C4223299FA2BB00EB5E91 /* LifeStyleGoalViewController.swift */,
 				B91C4225299FA2C700EB5E91 /* SetWeightViewController.swift */,
@@ -175,6 +213,7 @@
 				B91C422D299FA31100EB5E91 /* SelectActivityLevelViewController.swift */,
 				B91C422F299FA32500EB5E91 /* SelectLocationViewController.swift */,
 				B91C4231299FA33200EB5E91 /* ConfirmDetailViewController.swift */,
+				1DA579A429D84FB100114081 /* ResultViewController.swift */,
 				B91C423C29A0AAB900EB5E91 /* PageHeadings.swift */,
 				B91C424029A0CF9000EB5E91 /* PrepExtensions.swift */,
 				B91C424729A269A100EB5E91 /* LifeStyleCell.swift */,
@@ -373,7 +412,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DA579B029D85BAA00114081 /* SelectSubscriptionCollectionCell.xib in Resources */,
 				B91C4237299FB1CE00EB5E91 /* LabelWithTextField.xib in Resources */,
+				1DA579A929D8595900114081 /* SelectDateCollectionCell.xib in Resources */,
 				B9E2F4B929A78CBA00D6B5C1 /* ActivityView.xib in Resources */,
 				B9F6492B299CD8CC00DF846A /* LaunchScreen.storyboard in Resources */,
 				B91C424629A0F10100EB5E91 /* ButtonWithImage.xib in Resources */,
@@ -453,9 +494,12 @@
 				9A8EBEA929C1A7B80019C40C /* MobileVerificationController.swift in Sources */,
 				B91C424129A0CF9000EB5E91 /* PrepExtensions.swift in Sources */,
 				B9F64934299CD93200DF846A /* IntroViewController.swift in Sources */,
+				1DA579A529D84FB100114081 /* ResultViewController.swift in Sources */,
 				B91C423D29A0AAB900EB5E91 /* PageHeadings.swift in Sources */,
 				B91C4230299FA32500EB5E91 /* SelectLocationViewController.swift in Sources */,
+				1DA579A829D8595900114081 /* SelectDateCollectionCell.swift in Sources */,
 				B91C422E299FA31100EB5E91 /* SelectActivityLevelViewController.swift in Sources */,
+				1DA579AF29D85BAA00114081 /* SelectSubscriptionCollectionCell.swift in Sources */,
 				B91C4226299FA2C700EB5E91 /* SetWeightViewController.swift in Sources */,
 				B91C4222299FA2AB00EB5E91 /* CreateAccountViewController.swift in Sources */,
 				B9E2F4B729A78CAD00D6B5C1 /* ActivityView.swift in Sources */,

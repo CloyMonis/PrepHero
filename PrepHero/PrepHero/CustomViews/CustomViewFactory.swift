@@ -56,6 +56,21 @@ class CustomViewFactory {
         view.addSubview(button)
         return button
     }
+    func getLabel(font: CustomFonts, size: CGFloat = 25) -> UILabel {
+        let label = UILabel()
+        if let poppinsBold = UIFont(name: font.rawValue, size: size) {
+            label.font = UIFontMetrics.default.scaledFont(for: poppinsBold)
+            label.adjustsFontForContentSizeCategory = true
+        }
+        return label
+    }
+    func updateLabel(for label: UILabel, font: CustomFonts, text: String, size: CGFloat) {
+        if let poppinsBold = UIFont(name: font.rawValue, size: size) {
+            label.font = UIFontMetrics.default.scaledFont(for: poppinsBold)
+            label.adjustsFontForContentSizeCategory = true
+        }
+        label.text = text
+    }
     func getHeading(view: UIView) -> UILabel {
         let label = UILabel()
         if let poppinsBold = UIFont(name: CustomFonts.bold.rawValue, size: 25) {

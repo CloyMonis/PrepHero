@@ -9,6 +9,7 @@ import UIKit
 
 class ConfirmDetailViewController: UIViewController {
     let viewFactory = CustomViewFactory()
+    let viewControllerPresenter = ViewControllerPresenter()
     var stackView: UIStackView?
     var heading: UILabel?
     var previousButton: UIButton?
@@ -19,6 +20,11 @@ class ConfirmDetailViewController: UIViewController {
         super.viewDidLoad()
 
         setUpViews()
+    }
+    @objc func actionNext() {
+        if let nextVC = viewControllerPresenter.getNextViewController(current: self, nextVC: ResultViewController.self) {
+            self.present(nextVC, animated: true)
+        }
     }
 }
 
@@ -31,5 +37,6 @@ extension ConfirmDetailViewController {
         nextButton = viewFactory.getNextButton(view: view)
         scrollView.customize()
         scrollContentView.customizeScrollContentView()
+        nextButton?.addTarget(self, action: #selector(actionNext), for: .touchUpInside)
     }
 }
