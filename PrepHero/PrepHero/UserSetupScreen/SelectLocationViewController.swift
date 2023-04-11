@@ -10,25 +10,30 @@ import GoogleMaps
 
 class SelectLocationViewController: UIViewController {
     let viewFactory = CustomViewFactory()
+    let locationManager = CLLocationManager()
     let viewControllerPresenter = ViewControllerPresenter()
+    var mapView: GMSMapView?
+    let marker = GMSMarker()
     var stackView: UIStackView?
     var heading: UILabel?
     var previousButton: UIButton?
     var nextButton: UIButton?
     var skipButton: UIButton?
+    var signUpResult = SignUpResult()
     @IBOutlet weak var viewForMaps: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        askPermission()
         setUpViews()
         displayMap()
     }
-    @objc func actionNext(){
-        if let nextVC = viewControllerPresenter.getNextViewController(current: self, nextVC: ConfirmDetailViewController.self) {
+    @objc func actionNext() {
+        if let nextVC = viewControllerPresenter.getNextViewController(current: self, nextVC: ConfirmDetailViewController.self) as? ConfirmDetailViewController {
+            nextVC.signUpResult = signUpResult
             self.present(nextVC, animated: true)
         }
     }
-    @objc func actionPrevious(){
+    @objc func actionPrevious() {
         self.dismiss(animated: true)
     }
 }
@@ -47,14 +52,59 @@ extension SelectLocationViewController {
         previousButton?.addTarget(self, action: #selector(actionPrevious), for: .touchUpInside)
         nextButton?.addTarget(self, action: #selector(actionNext), for: .touchUpInside)
     }
+    func askPermission() {
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+    }
     func displayMap() {
-        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
-        let mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)
-        self.viewForMaps.addSubview(mapView)
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
-        marker.title = "Sydney"
-        marker.snippet = "Australia"
+        viewForMaps.layoutIfNeeded()
+        mapView = GMSMapView.map(withFrame: viewForMaps.bounds, camera: GMSCameraPosition())
+        if let mapView = mapView {
+            mapView.delegate = self
+            viewForMaps.addSubview(mapView)
+        }
+        marker.isDraggable = true
         marker.map = mapView
+    }
+}
+
+extension SelectLocationViewController: GMSMapViewDelegate {
+    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+        reverseGeocodeCoordinate(position.target)
+    }
+}
+
+extension SelectLocationViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        guard status == .authorizedWhenInUse else {
+            return
+        }
+        locationManager.startUpdatingLocation()
+        mapView?.isMyLocationEnabled = true
+        mapView?.settings.myLocationButton = true
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.first else {
+            return
+        }
+        mapView?.camera = GMSCameraPosition(target: location.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
+        reverseGeocodeCoordinate(location.coordinate)
+        locationManager.stopUpdatingLocation()
+    }
+    private func reverseGeocodeCoordinate(_ coordinate: CLLocationCoordinate2D) {
+        let geocoder = GMSGeocoder()
+        geocoder.reverseGeocodeCoordinate(coordinate) { response, error in
+            guard let address = response?.firstResult(), let lines = address.lines else {
+                return
+            }
+            self.signUpResult.Lat = coordinate.latitude.description
+            self.signUpResult.Lng = coordinate.longitude.description
+            self.marker.position = coordinate
+            self.marker.title = lines.joined(separator: "\n")
+            UIView.animate(withDuration: 0.25) {
+                self.view.layoutIfNeeded()
+            }
+        }
     }
 }

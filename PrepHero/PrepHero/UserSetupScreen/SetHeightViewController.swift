@@ -17,6 +17,7 @@ class SetHeightViewController: UIViewController {
     var nextButton: UIButton?
     var skipButton: UIButton?
     var signUpOptions: SignUpOptions?
+    var signUpResult = SignUpResult()
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var sliderBackground: UIImageView!
     @IBOutlet weak var labelHeight: UILabel!
@@ -25,9 +26,11 @@ class SetHeightViewController: UIViewController {
 
         setUpViews()
     }
-    @objc func actionNext(){
+    @objc func actionNext() {
+        signUpResult.Height = Int(slider.value)
         if let nextVC = viewControllerPresenter.getNextViewController(current: self, nextVC: SelectAllergyViewController.self) as? SelectAllergyViewController {
             nextVC.signUpOptions = signUpOptions
+            nextVC.signUpResult = signUpResult
             self.present(nextVC, animated: true)
         }
     }
@@ -35,7 +38,6 @@ class SetHeightViewController: UIViewController {
         self.dismiss(animated: true)
     }
     @IBAction func sliderChanged(_ sender: Any) {
-        //print(String(Int(slider.value)) + " cm")
         labelHeight.text = String(Int(slider.value)) + " cm"
     }
 }

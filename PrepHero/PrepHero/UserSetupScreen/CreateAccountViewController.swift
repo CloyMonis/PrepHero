@@ -13,6 +13,7 @@ class CreateAccountViewController: UIViewController {
     let viewControllerPresenter = ViewControllerPresenter()
     let httpCient = HttpClient()
     var signUpOptions: SignUpOptions?
+    var signUpResult = SignUpResult()
     var stackView: UIStackView?
     var heading: UILabel?
     var previousButton: UIButton?
@@ -24,7 +25,6 @@ class CreateAccountViewController: UIViewController {
     @IBOutlet weak var emailView: LabelWithTextField!
     @IBOutlet weak var dobView: ButtonWithImage!
     @IBOutlet weak var genderView: ButtonWithImage!
-    var userInfo = PrepUserInfo()
     let tagDOB = 111
     let tagGender = 112
     override func viewDidLoad() {
@@ -32,58 +32,61 @@ class CreateAccountViewController: UIViewController {
         
         setUpViews()
         setUpDelegates()
-        //setupPicker()
-        httpCient.fetch { result in
+        httpCient.request(api: .signUpOptions) { result in
             switch result {
             case .failure(let error):
-                print("error:\(error)")
+                print("Error: \(error)")
             case .success(let obj):
-                self.signUpOptions = obj
+                let decoder = JSONDecoder()
+                if let response = try? decoder.decode(SignUpOptions.self, from: obj) {
+                    self.signUpOptions = response
+                }
             }
         }
     }
-    @objc func actionNext(){
-//        guard let firstNameTextField = firstNameView.textField, let firstName = firstNameTextField.text, firstName.count > 1 else {
-//            validationsFailed()
-//            firstNameView.validationsFailed()
-//            return
-//        }
-//        userInfo.firstName = firstName
-//        guard let lastNameTextField = lastNameView.textField, let lastName = lastNameTextField.text, lastName.count > 1 else {
-//            validationsFailed()
-//            lastNameView.validationsFailed()
-//            return
-//        }
-//        userInfo.lastName = lastName
-//        guard let emailTextField = emailView.textField, let email = emailTextField.text, email.count > 1 else {
-//            validationsFailed()
-//            emailView.validationsFailed()
-//            return
-//        }
-//        userInfo.email = email
-//        guard let dobTextField = dobView.textField, let dob = dobTextField.text, dob.count > 1 else {
-//            validationsFailed()
-//            dobView.validationsFailed()
-//            return
-//        }
-//        userInfo.dob = dob
-//        guard let genderTextField = genderView.textField, let gender = genderTextField.text, gender.count > 1 else {
-//            validationsFailed()
-//            genderView.validationsFailed()
-//            return
-//        }
-//        userInfo.gender = gender
+    @objc func actionNext() {
+        guard let firstNameTextField = firstNameView.textField, let firstName = firstNameTextField.text, firstName.count > 1 else {
+            validationsFailed(text: "firstName")
+            firstNameView.validationsFailed()
+            return
+        }
+        signUpResult.FirstName = firstName
+        guard let lastNameTextField = lastNameView.textField, let lastName = lastNameTextField.text, lastName.count > 1 else {
+            validationsFailed(text: "lastName")
+            lastNameView.validationsFailed()
+            return
+        }
+        signUpResult.LastName = lastName
+        guard let emailTextField = emailView.textField, let email = emailTextField.text, email.count > 1 else {
+            validationsFailed(text: "email")
+            emailView.validationsFailed()
+            return
+        }
+        signUpResult.Email = email
+        guard dobView.buttonText.count > 1 else {
+            validationsFailed(text: "date of Birth")
+            dobView.validationsFailed()
+            return
+        }
+        signUpResult.DOB = dobView.buttonText
+        guard genderView.buttonText.count > 1 else {
+            validationsFailed(text: "gender")
+            genderView.validationsFailed()
+            return
+        }
+        signUpResult.Gender = genderView.buttonText
         if let nextVC = viewControllerPresenter.getNextViewController(current: self, nextVC: LifeStyleGoalViewController.self) as? LifeStyleGoalViewController {
             nextVC.signUpOptions = signUpOptions
-            //nextVC.prepUserInfo = userInfo
+            nextVC.signUpResult = signUpResult
             self.present(nextVC, animated: true)
         }
     }
-    @objc func actionPrevious(){
-        self.dismiss(animated: true)
+    @objc func actionPrevious() {
+        // Show SingUp Page
+        // self.dismiss(animated: true)
     }
-    func validationsFailed(){
-        print("validationsFailed")
+    func validationsFailed(text: String) {
+        print("validationsFailed",text)
     }
 }
 extension CreateAccountViewController {
@@ -128,9 +131,6 @@ extension CreateAccountViewController: ButtonWithImageDelegate {
             }
         default:
             print("")
-        }
-        if tag == tagDOB {
-            
         }
     }
 }

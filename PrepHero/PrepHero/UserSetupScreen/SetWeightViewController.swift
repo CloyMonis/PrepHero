@@ -17,6 +17,7 @@ class SetWeightViewController: UIViewController {
     var nextButton: UIButton?
     var skipButton: UIButton?
     var signUpOptions: SignUpOptions?
+    var signUpResult = SignUpResult()
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var labelWeight: UILabel!
     override func viewDidLoad() {
@@ -24,13 +25,15 @@ class SetWeightViewController: UIViewController {
 
         setUpViews()
     }
-    @objc func actionNext(){
+    @objc func actionNext() {
+        signUpResult.Weight = Int(slider.value)
         if let nextVC = viewControllerPresenter.getNextViewController(current: self, nextVC: SetHeightViewController.self) as? SetHeightViewController {
             nextVC.signUpOptions = signUpOptions
+            nextVC.signUpResult = signUpResult
             self.present(nextVC, animated: true)
         }
     }
-    @objc func actionPrevious(){
+    @objc func actionPrevious() {
         self.dismiss(animated: true)
     }
     @IBAction func sliderChanged(_ sender: Any) {

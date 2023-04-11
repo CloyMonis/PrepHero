@@ -7,11 +7,21 @@
 
 import UIKit
 
+class MenuOption {
+    let date: String
+    var isSelected: Bool = false
+    init(date: String) {
+        self.date = date
+    }
+}
+
 class ResultViewController: UIViewController {
-    let viewFactory = CustomViewFactory()
-    let selectDate_Arr = ["1 APRIL","2 APRIL","3 APRIL","4 APRIL","5 APRIL","6 APRIL"]
-    let selectPlan_Arr1 = ["FAT LOSS","WEIGHT GAIN","BODY BUILDING"]
-    let selectPlan_Arr2 = ["1100 - 1300 Cal.","1500 - 1800 Cal.","1800 - 2000 Cal."]
+    var prepareResult = PrepareResultData()
+    private let viewFactory = CustomViewFactory()
+    private var selectMenu_Arr = [MenuOption]()
+    private var selectPlan_Arr = [PreparePlanList]()
+    private let apiDateFormat = "yyyy-MM-dd"
+    private let showDateFormat = "d MMM"
     @IBOutlet weak var yourResult_Lbl: UIView!
     @IBOutlet weak var summary_V: UIView!
     @IBOutlet weak var summaryChart_V: UIView!
@@ -48,6 +58,8 @@ class ResultViewController: UIViewController {
         // UPDATE HEADER's & SUB HEADER's
         updateHeaders()
         updateSubHeaders()
+        updateMenuArray()
+        updatePlanArray()
         
         // ADD CORNER RADIUS
         roundCorners()
@@ -106,6 +118,93 @@ extension ResultViewController {
     }
 }
 
+extension ResultViewController {
+    private func updateDateFormat(for date: String, from date1: String, to date2: String) -> String {
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = date1
+        let showDate = dateFormat.date(from: date)
+        dateFormat.dateFormat = date2
+        return dateFormat.string(from: showDate ?? Date())
+    }
+    private func updateMenuArray() {
+        guard let menus = prepareResult.SampleMenu else {
+            print("Sample Menu is empty or nil")
+            return
+        }
+        for menu in menus {
+            if let mealDate = menu.MealDate {
+                let convertedDate = updateDateFormat(for: mealDate, from: apiDateFormat, to: showDateFormat).uppercased()
+                if !selectMenu_Arr.contains(where: { $0.date == convertedDate }) {
+                    selectMenu_Arr.append(MenuOption(date: convertedDate))
+                }
+            }
+        }
+        if selectMenu_Arr.count > 1 {
+            selectMenu_Arr[0].isSelected = true
+        }
+    }
+    private func updatePlanArray() {
+        guard let plans = prepareResult.PlanList else {
+            print("Plan List is empty or nil")
+            return
+        }
+        for plan in plans {
+            selectPlan_Arr.append(plan)
+        }
+    }
+    private func updateImageArray(date: String) {
+        let year = Calendar.current.component(.year, from: Date())
+        guard let menus = prepareResult.SampleMenu else {
+            print("Sample Menu is empty or nil")
+            return
+        }
+        let convertedDate = updateDateFormat(for: date+" \(year)", from: showDateFormat, to: apiDateFormat)
+        for menu in menus {
+            if let mealDate = menu.MealDate {
+                if mealDate == convertedDate {
+                    if let mealName = menu.MealName {
+                        DispatchQueue.main.async {
+                            switch PrepareMeal(rawValue: mealName) {
+                            case .none:
+                                print("")
+                            case .some(.breakfast):
+                                self.breakFast_Img.image = self.loadImage(url: menu.RecipeImage) ?? UIImage(named: "breakfast")
+                            case .some(.lunch):
+                                self.lunch_Img.image = self.loadImage(url: menu.RecipeImage) ?? UIImage(named: "lunch")
+                            case .some(.dinner):
+                                self.dinner_Img.image = self.loadImage(url: menu.RecipeImage) ?? UIImage(named: "dinner")
+                            case .some(.amSnack):
+                                self.am_snack_Img.image = self.loadImage(url: menu.RecipeImage) ?? UIImage(named: "am_snack")
+                            case .some(.pmSnack):
+                                self.pm_snack_Img.image = self.loadImage(url: menu.RecipeImage) ?? UIImage(named: "pm_snack")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private func loadImage(url: String?) -> UIImage? {
+        guard let urlString = url else {
+            print("String is empty or nil")
+            return nil
+        }
+        guard let url = URL(string: urlString) else {
+            print("Image URL is empty or nil")
+            return nil
+        }
+        guard let data = try? Data(contentsOf: url) else {
+            print("Image Data is corrupted or nil")
+            return nil
+        }
+        guard let image = UIImage(data: data) else {
+            print("Image is corrupted or nil")
+            return nil
+        }
+        return image
+    }
+}
+
 extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func registerXIBs () {
         selectDateCollection.register(UINib(nibName: "SelectDateCollectionCell", bundle: nil), forCellWithReuseIdentifier: SelectDateCollectionCell.getCellName())
@@ -113,34 +212,42 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == selectDateCollection {
-            return 5
+            return selectMenu_Arr.count
         }
         if collectionView == selectPlanCollection {
-            return 3
+            return selectPlan_Arr.count
         }
         return 0
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == selectDateCollection {
+            if selectMenu_Arr.count < indexPath.row { return UICollectionViewCell() }
+            if indexPath.row == 0 { updateImageArray(date: selectMenu_Arr[indexPath.row].date) }
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectDateCollectionCell.getCellName(), for: indexPath) as! SelectDateCollectionCell
-            viewFactory.updateLabel(for: cell.date_Lbl, font: .bold, text: selectDate_Arr[indexPath.row], size: 15)
-            cell.dateSelected.backgroundColor = indexPath.row == 0 ? UIColor(hex: "#FAA21C") : UIColor(hex: "#EAEAEA")
+            viewFactory.updateLabel(for: cell.date_Lbl, font: .bold, text: selectMenu_Arr[indexPath.row].date, size: 15)
+            cell.dateSelected.backgroundColor = selectMenu_Arr[indexPath.row].isSelected ? UIColor(hex: "#FAA21C") : UIColor(hex: "#EAEAEA")
             cell.isSelected = indexPath.row == 0 ? true : false
             cell.isHighlighted = indexPath.row == 0 ? true : false
             return cell
         }
         if collectionView == selectPlanCollection {
+            if selectPlan_Arr.count < indexPath.row { return UICollectionViewCell() }
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectSubscriptionCollectionCell.getCellName(), for: indexPath) as! SelectSubscriptionCollectionCell
             cell.backView.layer.cornerRadius = 10
             cell.backView.layer.borderWidth = 1.0
             cell.backView.layer.borderColor = UIColor(hex: "#EAEAEA")?.cgColor
-            viewFactory.updateLabel(for: cell.title_Lbl, font: .regular, text: selectPlan_Arr1[indexPath.row], size: 14)
-            viewFactory.updateLabel(for: cell.subTitle_Lbl, font: .regular, text: selectPlan_Arr2[indexPath.row], size: 14)
+            viewFactory.updateLabel(for: cell.title_Lbl, font: .regular, text: selectPlan_Arr[indexPath.row].PlanName ?? "", size: 14)
+            viewFactory.updateLabel(for: cell.subTitle_Lbl, font: .regular, text: selectPlan_Arr[indexPath.row].CalRange ?? "", size: 14)
             cell.subscription_Img.layer.cornerRadius = 10.0
-            viewFactory.updateLabel(for: cell.includedPlan1_Lbl, font: .regular, text: "Includes Breakfast, Lunch, Dinner & 2 Snacks", size: 10)
-            viewFactory.updateLabel(for: cell.includedPlan2_Lbl, font: .regular, text: "Serves you recomended calorie range", size: 10)
-            viewFactory.updateLabel(for: cell.includedPlan3_Lbl, font: .regular, text: "5 Days / 4 Weeks", size: 10)
-            viewFactory.updateLabel(for: cell.includedPlan4_Lbl, font: .regular, text: "Unlimited Pauses / Changes", size: 10)
+            let planText = selectPlan_Arr[indexPath.row].PlanText ?? [PreparePlanText]()
+            let text1 = planText.count >= 1 ? (planText[0].Text ?? "") : "Includes Breakfast, Lunch, Dinner & 2 Snacks"
+            viewFactory.updateLabel(for: cell.includedPlan1_Lbl, font: .regular, text: text1, size: 10)
+            let text2 = planText.count >= 2 ? (planText[1].Text ?? "") : "Serves you recomended calorie range"
+            viewFactory.updateLabel(for: cell.includedPlan2_Lbl, font: .regular, text: text2, size: 10)
+            let text3 = planText.count >= 3 ? (planText[2].Text ?? "") : "5 Days / 4 Weeks"
+            viewFactory.updateLabel(for: cell.includedPlan3_Lbl, font: .regular, text: text3, size: 10)
+            let text4 = planText.count >= 4 ? (planText[3].Text ?? "") : "Unlimited Pauses / Changes"
+            viewFactory.updateLabel(for: cell.includedPlan4_Lbl, font: .regular, text: text4, size: 10)
             return cell
         }
         return UICollectionViewCell()
@@ -156,19 +263,23 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == selectDateCollection {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectDateCollectionCell.getCellName(), for: indexPath) as? SelectDateCollectionCell {
-                cell.dateSelected.backgroundColor = UIColor(hex: "#FAA21C")
-            }
+            updateImageArray(date: selectMenu_Arr[indexPath.row].date)
+            selectItem(index: indexPath.row)
         }
         if collectionView == selectPlanCollection {
             collectionView.deselectItem(at: indexPath, animated: true)
         }
     }
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        if collectionView == selectDateCollection {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectDateCollectionCell.getCellName(), for: indexPath) as? SelectDateCollectionCell {
-                cell.dateSelected.backgroundColor = UIColor(hex: "#EAEAEA")
+    func selectItem(index: Int){
+        let item: MenuOption = selectMenu_Arr[index]
+        if item.isSelected {
+            item.isSelected = false
+        } else {
+            for eachItem in selectMenu_Arr {
+                eachItem.isSelected = false
             }
+            item.isSelected = true
         }
+        selectDateCollection.reloadData()
     }
 }

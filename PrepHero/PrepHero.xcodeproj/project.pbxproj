@@ -7,15 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D9E87CF29E1829700BE4E65 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9E87CE29E1829700BE4E65 /* SignUpModel.swift */; };
 		1DA579A529D84FB100114081 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA579A429D84FB100114081 /* ResultViewController.swift */; };
 		1DA579A829D8595900114081 /* SelectDateCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA579A629D8595900114081 /* SelectDateCollectionCell.swift */; };
 		1DA579A929D8595900114081 /* SelectDateCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DA579A729D8595900114081 /* SelectDateCollectionCell.xib */; };
 		1DA579AF29D85BAA00114081 /* SelectSubscriptionCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA579AD29D85BAA00114081 /* SelectSubscriptionCollectionCell.swift */; };
 		1DA579B029D85BAA00114081 /* SelectSubscriptionCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DA579AE29D85BAA00114081 /* SelectSubscriptionCollectionCell.xib */; };
+		1DEB37DE29E486E500DD0401 /* PrepareResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEB37DD29E486E500DD0401 /* PrepareResultViewController.swift */; };
+		1DEB37E129E48B2800DD0401 /* UIImage_Gif_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEB37E029E48B2800DD0401 /* UIImage_Gif_Extension.swift */; };
+		1DEB37E329E48BEC00DD0401 /* prepare_result.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1DEB37E229E48BEC00DD0401 /* prepare_result.gif */; };
 		7A4BBD96EE08CED2381C329D /* Pods_PrepHero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB46B20033EA0906B9EF7D49 /* Pods_PrepHero.framework */; };
 		9A525BC529C5849100A03FDD /* RPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A525BC429C5849100A03FDD /* RPicker.swift */; };
 		9A80E61829BEE30F00CE13A3 /* ViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A80E61729BEE30F00CE13A3 /* ViewControllerPresenter.swift */; };
-		9A80E61A29BEFDBD00CE13A3 /* PrepUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A80E61929BEFDBD00CE13A3 /* PrepUserInfo.swift */; };
 		9A8EBEA929C1A7B80019C40C /* MobileVerificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8EBEA829C1A7B80019C40C /* MobileVerificationController.swift */; };
 		9A8EBEAB29C1A7CB0019C40C /* OTPVerificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8EBEAA29C1A7CB0019C40C /* OTPVerificationController.swift */; };
 		9ACF4C0B29C33FD2008B4D41 /* OTPStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACF4C0A29C33FD2008B4D41 /* OTPStackView.swift */; };
@@ -57,14 +60,17 @@
 
 /* Begin PBXFileReference section */
 		0710FB961EDC2C5CE0458E01 /* Pods-PrepHero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PrepHero.debug.xcconfig"; path = "Target Support Files/Pods-PrepHero/Pods-PrepHero.debug.xcconfig"; sourceTree = "<group>"; };
+		1D9E87CE29E1829700BE4E65 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		1DA579A429D84FB100114081 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		1DA579A629D8595900114081 /* SelectDateCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateCollectionCell.swift; sourceTree = "<group>"; };
 		1DA579A729D8595900114081 /* SelectDateCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectDateCollectionCell.xib; sourceTree = "<group>"; };
 		1DA579AD29D85BAA00114081 /* SelectSubscriptionCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSubscriptionCollectionCell.swift; sourceTree = "<group>"; };
 		1DA579AE29D85BAA00114081 /* SelectSubscriptionCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectSubscriptionCollectionCell.xib; sourceTree = "<group>"; };
+		1DEB37DD29E486E500DD0401 /* PrepareResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareResultViewController.swift; sourceTree = "<group>"; };
+		1DEB37E029E48B2800DD0401 /* UIImage_Gif_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage_Gif_Extension.swift; sourceTree = "<group>"; };
+		1DEB37E229E48BEC00DD0401 /* prepare_result.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = prepare_result.gif; sourceTree = "<group>"; };
 		9A525BC429C5849100A03FDD /* RPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPicker.swift; sourceTree = "<group>"; };
 		9A80E61729BEE30F00CE13A3 /* ViewControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerPresenter.swift; sourceTree = "<group>"; };
-		9A80E61929BEFDBD00CE13A3 /* PrepUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepUserInfo.swift; sourceTree = "<group>"; };
 		9A8EBEA829C1A7B80019C40C /* MobileVerificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileVerificationController.swift; sourceTree = "<group>"; };
 		9A8EBEAA29C1A7CB0019C40C /* OTPVerificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationController.swift; sourceTree = "<group>"; };
 		9ACF4C0A29C33FD2008B4D41 /* OTPStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPStackView.swift; sourceTree = "<group>"; };
@@ -128,6 +134,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		1D9E87CD29E1828700BE4E65 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1D9E87CE29E1829700BE4E65 /* SignUpModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		1DA579AA29D8595F00114081 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +167,22 @@
 				1DA579AE29D85BAA00114081 /* SelectSubscriptionCollectionCell.xib */,
 			);
 			path = SelectSubscription;
+			sourceTree = "<group>";
+		};
+		1DEB37DF29E48B1F00DD0401 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				1DEB37E029E48B2800DD0401 /* UIImage_Gif_Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		1DEB37E429E48C4D00DD0401 /* Gifs */ = {
+			isa = PBXGroup;
+			children = (
+				1DEB37E229E48BEC00DD0401 /* prepare_result.gif */,
+			);
+			path = Gifs;
 			sourceTree = "<group>";
 		};
 		72D006A4C5E86A28361643FF /* Pods */ = {
@@ -213,11 +243,11 @@
 				B91C422D299FA31100EB5E91 /* SelectActivityLevelViewController.swift */,
 				B91C422F299FA32500EB5E91 /* SelectLocationViewController.swift */,
 				B91C4231299FA33200EB5E91 /* ConfirmDetailViewController.swift */,
+				1DEB37DD29E486E500DD0401 /* PrepareResultViewController.swift */,
 				1DA579A429D84FB100114081 /* ResultViewController.swift */,
 				B91C423C29A0AAB900EB5E91 /* PageHeadings.swift */,
 				B91C424029A0CF9000EB5E91 /* PrepExtensions.swift */,
 				B91C424729A269A100EB5E91 /* LifeStyleCell.swift */,
-				9A80E61929BEFDBD00CE13A3 /* PrepUserInfo.swift */,
 			);
 			path = UserSetupScreen;
 			sourceTree = "<group>";
@@ -278,6 +308,9 @@
 		B9F6491D299CD8CA00DF846A /* PrepHero */ = {
 			isa = PBXGroup;
 			children = (
+				1DEB37E429E48C4D00DD0401 /* Gifs */,
+				1DEB37DF29E48B1F00DD0401 /* Extension */,
+				1D9E87CD29E1828700BE4E65 /* Model */,
 				9A8EBEA529C1A6F90019C40C /* MobileVerificationScreens */,
 				B9C01FDC29AA5E45005E6535 /* HttpClient */,
 				B91C4220299FA25200EB5E91 /* UserSetupScreen */,
@@ -423,6 +456,7 @@
 				B9F64928299CD8CC00DF846A /* Assets.xcassets in Resources */,
 				B9F64926299CD8CA00DF846A /* Main.storyboard in Resources */,
 				B9F6493A299CF5DE00DF846A /* Poppins-Regular.ttf in Resources */,
+				1DEB37E329E48BEC00DD0401 /* prepare_result.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,9 +517,10 @@
 				B91C423B29A0A6C300EB5E91 /* CustomFonts.swift in Sources */,
 				B91C4224299FA2BB00EB5E91 /* LifeStyleGoalViewController.swift in Sources */,
 				B91C4235299FB1C200EB5E91 /* LabelWithTextField.swift in Sources */,
+				1DEB37E129E48B2800DD0401 /* UIImage_Gif_Extension.swift in Sources */,
 				B91C4232299FA33200EB5E91 /* ConfirmDetailViewController.swift in Sources */,
-				9A80E61A29BEFDBD00CE13A3 /* PrepUserInfo.swift in Sources */,
 				9A525BC529C5849100A03FDD /* RPicker.swift in Sources */,
+				1DEB37DE29E486E500DD0401 /* PrepareResultViewController.swift in Sources */,
 				9A80E61829BEE30F00CE13A3 /* ViewControllerPresenter.swift in Sources */,
 				B9F64921299CD8CA00DF846A /* SceneDelegate.swift in Sources */,
 				B91C422A299FA2E600EB5E91 /* SelectAllergyViewController.swift in Sources */,
@@ -497,6 +532,7 @@
 				1DA579A529D84FB100114081 /* ResultViewController.swift in Sources */,
 				B91C423D29A0AAB900EB5E91 /* PageHeadings.swift in Sources */,
 				B91C4230299FA32500EB5E91 /* SelectLocationViewController.swift in Sources */,
+				1D9E87CF29E1829700BE4E65 /* SignUpModel.swift in Sources */,
 				1DA579A829D8595900114081 /* SelectDateCollectionCell.swift in Sources */,
 				B91C422E299FA31100EB5E91 /* SelectActivityLevelViewController.swift in Sources */,
 				1DA579AF29D85BAA00114081 /* SelectSubscriptionCollectionCell.swift in Sources */,

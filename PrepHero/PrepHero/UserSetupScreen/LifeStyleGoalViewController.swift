@@ -8,9 +8,11 @@
 import UIKit
 
 class LifeStyleOption {
+    let itemId: Int
     let itemName: String
     var isSelected: Bool = false
-    init(itemName: String) {
+    init(itemId: Int, itemName: String) {
+        self.itemId = itemId
         self.itemName = itemName
     }
 }
@@ -25,30 +27,34 @@ class LifeStyleGoalViewController: UIViewController {
     var nextButton: UIButton?
     var skipButton: UIButton?
     var signUpOptions: SignUpOptions?
+    var signUpResult = SignUpResult()
     var items = [LifeStyleOption]()
     @IBOutlet weak var tableView: UITableView!
-    var prepUserInfo: PrepUserInfo?
     var selectedIndex: Int?
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //print(prepUserInfo)
+        
         setUpViews()
         if let signUpOptions = signUpOptions {
-            let goalOptions: [LifeStyleOption] = signUpOptions.options.goals.compactMap{ LifeStyleOption(itemName: $0.option) }
+            let goalOptions: [LifeStyleOption] = signUpOptions.options.goals.compactMap{ LifeStyleOption(itemId: $0.id, itemName: $0.option) }
             items.append(contentsOf: goalOptions)
             print("items:\(items)")
         }
         tableView.dataSource = self
         tableView.delegate = self
     }
-    @objc func actionNext(){
+    @objc func actionNext() {
+        guard signUpResult.GoalID != nil else {
+            createAnAlert(message: "Please select a value before proceeding.")
+            return
+        }
         if let nextVC = viewControllerPresenter.getNextViewController(current: self, nextVC: SetWeightViewController.self) as? SetWeightViewController {
             nextVC.signUpOptions = signUpOptions
+            nextVC.signUpResult = signUpResult
             self.present(nextVC, animated: true)
         }
     }
-    @objc func actionPrevious(){
+    @objc func actionPrevious() {
         self.dismiss(animated: true)
     }
 }
@@ -108,15 +114,25 @@ extension LifeStyleGoalViewController: UITableViewDataSource, UITableViewDelegat
         selectItem(index: indexPath.row)
     }
     func selectItem(index: Int){
-        var item: LifeStyleOption = items[index]
+        let item: LifeStyleOption = items[index]
         if item.isSelected {
             item.isSelected = false
+            signUpResult.GoalID = nil
         } else {
             for eachItem in items {
                 eachItem.isSelected = false
             }
             item.isSelected = true
+            signUpResult.GoalID = item.itemId
         }
         self.tableView.reloadData()
+    }
+}
+
+extension UIViewController {
+    func createAnAlert(_ title: String = "PrepHero", message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }

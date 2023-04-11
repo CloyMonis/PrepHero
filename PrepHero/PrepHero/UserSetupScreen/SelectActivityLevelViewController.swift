@@ -16,17 +16,19 @@ class SelectActivityLevelViewController: UIViewController {
     var previousButton: UIButton?
     var nextButton: UIButton?
     var skipButton: UIButton?
+    var signUpResult = SignUpResult()
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
     var activityViews: [ActivityView] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpViews()
         setUpPageView()
     }
-    @objc func actionNext(){
-        if let nextVC = viewControllerPresenter.getNextViewController(current: self, nextVC: SelectLocationViewController.self) {
+    @objc func actionNext() {
+        if let nextVC = viewControllerPresenter.getNextViewController(current: self, nextVC: SelectLocationViewController.self) as? SelectLocationViewController {
+            signUpResult.LifeStyle = "S"
+            nextVC.signUpResult = signUpResult
             self.present(nextVC, animated: true)
         }
     }
@@ -121,12 +123,12 @@ extension SelectActivityLevelViewController {
         return [activityView1,activityView2,activityView3,activityView4,activityView5]
     }
     func setUpPages(activities: [ActivityView]) {
-        //        scrollView.contentSize = CGSize(width: view.frame.width * CGFloat(activities.count) , height: scrollView.frame.height)
-        //        scrollView.isPagingEnabled = true
-        //        for i in 0 ..< activities.count {
-        //            activities[i].frame = CGRect(x: view.frame.width * CGFloat(i) , y: 230 , width: view.frame.width, height: scrollView.frame.height)
-        //            scrollView.addSubview(activities[i])
-        //        }
+        // scrollView.contentSize = CGSize(width: view.frame.width * CGFloat(activities.count) , height: scrollView.frame.height)
+        // scrollView.isPagingEnabled = true
+        // for i in 0 ..< activities.count {
+        //     activities[i].frame = CGRect(x: view.frame.width * CGFloat(i) , y: 230 , width: view.frame.width, height: scrollView.frame.height)
+        //     scrollView.addSubview(activities[i])
+        // }
         scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         scrollView.contentSize = CGSize(width: view.frame.width * CGFloat(activities.count), height: view.frame.height)
         scrollView.isPagingEnabled = true

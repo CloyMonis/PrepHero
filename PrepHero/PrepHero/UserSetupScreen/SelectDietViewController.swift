@@ -21,6 +21,7 @@ class SelectDietViewController: UIViewController {
     var nextButton: UIButton?
     var skipButton: UIButton?
     var signUpOptions: SignUpOptions?
+    var signUpResult = SignUpResult()
     @IBOutlet weak var collectionView: UICollectionView!
     private let reuseIdentifier = "DietCell"
     var items = [PrepItem]()
@@ -39,12 +40,19 @@ class SelectDietViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
     }
-    @objc func actionNext(){
-        if let nextVC = viewControllerPresenter.getNextViewController(current: self, nextVC: SelectActivityLevelViewController.self) {
+    @objc func actionNext() {
+        let result = items.filter{ $0.isSelected }
+        let diet = result.map{ $0.itemName }
+        if diet.count == 0 {
+            createAnAlert(message: "Please select a value before proceeding.")
+        }
+        signUpResult.Diets = diet.joined(separator: ",")
+        if let nextVC = viewControllerPresenter.getNextViewController(current: self, nextVC: SelectActivityLevelViewController.self) as? SelectActivityLevelViewController {
+            nextVC.signUpResult = signUpResult
             self.present(nextVC, animated: true)
         }
     }
-    @objc func actionPrevious(){
+    @objc func actionPrevious() {
         self.dismiss(animated: true)
     }
 }
@@ -98,8 +106,12 @@ extension SelectDietViewController: UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let item = items[indexPath.row]
         let text = item.itemName as NSString
-        let textSize = text.size(withAttributes: nil)
-        return CGSize(width: textSize.width + 55 , height: textSize.height + 30)
+        let font = UIFont(name: CustomFonts.regular.rawValue, size: 17) ?? UIFont.systemFont(ofSize: 17)
+        let textSize = text.size(withAttributes: [NSAttributedString.Key.font : font])
+        let collectionSize = collectionView.bounds.width - 20
+        let maxWidth = (collectionSize / 3).rounded()
+        let width = textSize.width.rounded() > maxWidth ? textSize.width.rounded() + 10 : maxWidth
+        return CGSize(width: width, height: 40)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //print("selected Index Position : \(indexPath.row)")
