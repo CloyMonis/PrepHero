@@ -23,6 +23,7 @@ class SelectLocationViewController: UIViewController {
     @IBOutlet weak var viewForMaps: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        GMSServices.setMetalRendererEnabled(true)
         askPermission()
         setUpViews()
         displayMap()
@@ -63,7 +64,7 @@ extension SelectLocationViewController {
             mapView.delegate = self
             viewForMaps.addSubview(mapView)
         }
-        marker.isDraggable = true
+        // marker.isDraggable = true
         marker.map = mapView
     }
 }

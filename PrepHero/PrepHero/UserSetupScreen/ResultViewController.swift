@@ -20,6 +20,7 @@ class ResultViewController: UIViewController {
     private let viewFactory = CustomViewFactory()
     private var selectMenu_Arr = [MenuOption]()
     private var selectPlan_Arr = [PreparePlanList]()
+    private let cachedImages = NSCache<NSURL, UIImage>()
     private let apiDateFormat = "yyyy-MM-dd"
     private let showDateFormat = "d MMM"
     @IBOutlet weak var yourResult_Lbl: UIView!
@@ -193,6 +194,9 @@ extension ResultViewController {
             print("Image URL is empty or nil")
             return nil
         }
+        if let cachedImage = cachedImages.object(forKey: url as NSURL) {
+            return cachedImage
+        }
         guard let data = try? Data(contentsOf: url) else {
             print("Image Data is corrupted or nil")
             return nil
@@ -201,6 +205,7 @@ extension ResultViewController {
             print("Image is corrupted or nil")
             return nil
         }
+        cachedImages.setObject(image, forKey: url as NSURL, cost: data.count)
         return image
     }
 }
@@ -254,7 +259,7 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == selectDateCollection {
-            return CGSize(width: 100, height: 35)
+            return CGSize(width: 65, height: 35)
         }
         if collectionView == selectPlanCollection {
             return CGSize(width: 205, height: 420)

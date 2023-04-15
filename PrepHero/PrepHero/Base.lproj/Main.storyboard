@@ -1176,7 +1176,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Z26-ZI-AgI">
-                                                <rect key="frame" x="45" y="322" width="324" height="40"/>
+                                                <rect key="frame" x="25" y="322" width="364" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="N55-Fd-Bmo"/>
@@ -1441,7 +1441,7 @@
                                             <constraint firstItem="aPU-E1-6MK" firstAttribute="leading" secondItem="oiF-eF-YBT" secondAttribute="leading" constant="24" id="8RT-3R-CWw"/>
                                             <constraint firstItem="M2D-g7-Vpt" firstAttribute="leading" secondItem="oiF-eF-YBT" secondAttribute="leading" id="BII-3z-16R"/>
                                             <constraint firstItem="z7q-28-Otj" firstAttribute="leading" secondItem="oiF-eF-YBT" secondAttribute="leading" constant="26" id="CLa-lY-8Wv"/>
-                                            <constraint firstAttribute="trailing" secondItem="Z26-ZI-AgI" secondAttribute="trailing" constant="45" id="D84-Xb-uWh"/>
+                                            <constraint firstAttribute="trailing" secondItem="Z26-ZI-AgI" secondAttribute="trailing" constant="25" id="D84-Xb-uWh"/>
                                             <constraint firstItem="bpc-tk-Baf" firstAttribute="leading" secondItem="oiF-eF-YBT" secondAttribute="leading" constant="18" id="Kpi-El-5uQ"/>
                                             <constraint firstItem="4ml-Qi-6ud" firstAttribute="centerX" secondItem="oiF-eF-YBT" secondAttribute="centerX" id="Mco-4a-1hF"/>
                                             <constraint firstItem="AJC-JA-1Is" firstAttribute="leading" secondItem="oiF-eF-YBT" secondAttribute="leading" id="OKG-sg-MsR"/>
@@ -1457,7 +1457,7 @@
                                             <constraint firstItem="AJC-JA-1Is" firstAttribute="top" secondItem="ALg-v9-5PP" secondAttribute="bottom" constant="28" id="kxV-Wc-jUJ"/>
                                             <constraint firstItem="z7q-28-Otj" firstAttribute="top" secondItem="M2D-g7-Vpt" secondAttribute="bottom" constant="12" id="mjg-G5-pyP"/>
                                             <constraint firstAttribute="trailing" secondItem="aPU-E1-6MK" secondAttribute="trailing" id="nXl-qT-TOB"/>
-                                            <constraint firstItem="Z26-ZI-AgI" firstAttribute="leading" secondItem="oiF-eF-YBT" secondAttribute="leading" constant="45" id="uEa-xW-DsH"/>
+                                            <constraint firstItem="Z26-ZI-AgI" firstAttribute="leading" secondItem="oiF-eF-YBT" secondAttribute="leading" constant="25" id="uEa-xW-DsH"/>
                                             <constraint firstItem="aPU-E1-6MK" firstAttribute="top" secondItem="AJC-JA-1Is" secondAttribute="bottom" constant="20" id="vPo-zU-BGs"/>
                                             <constraint firstItem="Tx5-Kc-Ju5" firstAttribute="leading" secondItem="oiF-eF-YBT" secondAttribute="leading" id="wSx-BY-ZsQ"/>
                                         </constraints>
