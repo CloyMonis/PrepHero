@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D1225B429F41DE3009C00B2 /* ActivityViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1225B229F41DE3009C00B2 /* ActivityViewCell.swift */; };
+		1D1225B529F41DE3009C00B2 /* ActivityViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D1225B329F41DE3009C00B2 /* ActivityViewCell.xib */; };
+		1D1225B729F436FF009C00B2 /* CenterCellCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1225B629F436FF009C00B2 /* CenterCellCollectionViewFlowLayout.swift */; };
 		1D9E87CF29E1829700BE4E65 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9E87CE29E1829700BE4E65 /* SignUpModel.swift */; };
 		1DA579A529D84FB100114081 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA579A429D84FB100114081 /* ResultViewController.swift */; };
 		1DA579A829D8595900114081 /* SelectDateCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA579A629D8595900114081 /* SelectDateCollectionCell.swift */; };
@@ -60,6 +63,9 @@
 
 /* Begin PBXFileReference section */
 		0710FB961EDC2C5CE0458E01 /* Pods-PrepHero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PrepHero.debug.xcconfig"; path = "Target Support Files/Pods-PrepHero/Pods-PrepHero.debug.xcconfig"; sourceTree = "<group>"; };
+		1D1225B229F41DE3009C00B2 /* ActivityViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewCell.swift; sourceTree = "<group>"; };
+		1D1225B329F41DE3009C00B2 /* ActivityViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityViewCell.xib; sourceTree = "<group>"; };
+		1D1225B629F436FF009C00B2 /* CenterCellCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterCellCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		1D9E87CE29E1829700BE4E65 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		1DA579A429D84FB100114081 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		1DA579A629D8595900114081 /* SelectDateCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateCollectionCell.swift; sourceTree = "<group>"; };
@@ -134,6 +140,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		1D1225B129F41DB5009C00B2 /* SelectActivity */ = {
+			isa = PBXGroup;
+			children = (
+				1D1225B229F41DE3009C00B2 /* ActivityViewCell.swift */,
+				1D1225B329F41DE3009C00B2 /* ActivityViewCell.xib */,
+			);
+			path = SelectActivity;
+			sourceTree = "<group>";
+		};
 		1D9E87CD29E1828700BE4E65 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +160,7 @@
 		1DA579AA29D8595F00114081 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				1D1225B129F41DB5009C00B2 /* SelectActivity */,
 				1DA579AB29D8597200114081 /* SelectDate */,
 				1DA579AC29D85B8500114081 /* SelectSubscription */,
 			);
@@ -173,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				1DEB37E029E48B2800DD0401 /* UIImage_Gif_Extension.swift */,
+				1D1225B629F436FF009C00B2 /* CenterCellCollectionViewFlowLayout.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -456,6 +473,7 @@
 				B9F64928299CD8CC00DF846A /* Assets.xcassets in Resources */,
 				B9F64926299CD8CA00DF846A /* Main.storyboard in Resources */,
 				B9F6493A299CF5DE00DF846A /* Poppins-Regular.ttf in Resources */,
+				1D1225B529F41DE3009C00B2 /* ActivityViewCell.xib in Resources */,
 				1DEB37E329E48BEC00DD0401 /* prepare_result.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -522,11 +540,13 @@
 				9A525BC529C5849100A03FDD /* RPicker.swift in Sources */,
 				1DEB37DE29E486E500DD0401 /* PrepareResultViewController.swift in Sources */,
 				9A80E61829BEE30F00CE13A3 /* ViewControllerPresenter.swift in Sources */,
+				1D1225B729F436FF009C00B2 /* CenterCellCollectionViewFlowLayout.swift in Sources */,
 				B9F64921299CD8CA00DF846A /* SceneDelegate.swift in Sources */,
 				B91C422A299FA2E600EB5E91 /* SelectAllergyViewController.swift in Sources */,
 				B9C01FDE29AA5E55005E6535 /* HttpClient.swift in Sources */,
 				B91C422C299FA2FC00EB5E91 /* SelectDietViewController.swift in Sources */,
 				9A8EBEA929C1A7B80019C40C /* MobileVerificationController.swift in Sources */,
+				1D1225B429F41DE3009C00B2 /* ActivityViewCell.swift in Sources */,
 				B91C424129A0CF9000EB5E91 /* PrepExtensions.swift in Sources */,
 				B9F64934299CD93200DF846A /* IntroViewController.swift in Sources */,
 				1DA579A529D84FB100114081 /* ResultViewController.swift in Sources */,

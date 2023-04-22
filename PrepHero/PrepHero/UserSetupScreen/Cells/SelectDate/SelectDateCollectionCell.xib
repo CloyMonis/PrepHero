@@ -47,7 +47,7 @@
                     </view>
                 </subviews>
             </view>
-            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <viewLayoutGuide key="safeArea" id="Pfh-6u-29y"/>
             <constraints>
                 <constraint firstItem="ZHO-kh-kcn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="0E7-rt-skP"/>
                 <constraint firstItem="ZHO-kh-kcn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="0ia-Yd-J3g"/>
@@ -58,7 +58,7 @@
                 <outlet property="dateSelected" destination="1gR-nB-psA" id="Dts-Bj-bV5"/>
                 <outlet property="date_Lbl" destination="xm8-De-t73" id="V37-II-7zU"/>
             </connections>
-            <point key="canvasLocation" x="139" y="98"/>
+            <point key="canvasLocation" x="137.68115942028987" y="97.433035714285708"/>
         </collectionViewCell>
     </objects>
     <resources>

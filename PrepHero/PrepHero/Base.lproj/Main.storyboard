@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CgR-Jj-cj2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IlX-E1-kZ9">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -916,27 +916,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eTB-ou-o9Y">
-                                <rect key="frame" x="0.0" y="274" width="414" height="418"/>
-                            </scrollView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SS9-6Z-xxo">
+                                <rect key="frame" x="20" y="274" width="374" height="388"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VuB-YK-Rh9">
+                                    <size key="itemSize" width="300" height="300"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="rUz-Fb-3OB" id="1Je-9s-6OZ"/>
+                                    <outlet property="delegate" destination="rUz-Fb-3OB" id="jfU-5r-soh"/>
+                                </connections>
+                            </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="DMY-ha-E2d">
-                                <rect key="frame" x="149" y="702" width="116" height="26"/>
+                                <rect key="frame" x="149" y="672" width="116" height="26"/>
                             </pageControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="y15-iu-T0f"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="DMY-ha-E2d" firstAttribute="centerX" secondItem="eTB-ou-o9Y" secondAttribute="centerX" id="HVc-K6-4QS"/>
-                            <constraint firstItem="DMY-ha-E2d" firstAttribute="top" secondItem="eTB-ou-o9Y" secondAttribute="bottom" constant="10" id="MfC-NN-CFc"/>
-                            <constraint firstItem="y15-iu-T0f" firstAttribute="bottom" secondItem="eTB-ou-o9Y" secondAttribute="bottom" constant="170" id="TQH-d7-uNN"/>
-                            <constraint firstItem="eTB-ou-o9Y" firstAttribute="top" secondItem="y15-iu-T0f" secondAttribute="top" constant="230" id="XjD-up-BUb"/>
-                            <constraint firstItem="eTB-ou-o9Y" firstAttribute="leading" secondItem="y15-iu-T0f" secondAttribute="leading" id="xFH-G0-4Tm"/>
-                            <constraint firstItem="y15-iu-T0f" firstAttribute="trailing" secondItem="eTB-ou-o9Y" secondAttribute="trailing" id="y49-Xe-acn"/>
+                            <constraint firstItem="SS9-6Z-xxo" firstAttribute="leading" secondItem="y15-iu-T0f" secondAttribute="leading" constant="20" id="7Ye-Ga-oOk"/>
+                            <constraint firstItem="DMY-ha-E2d" firstAttribute="top" secondItem="SS9-6Z-xxo" secondAttribute="bottom" constant="10" id="GW3-5R-QXC"/>
+                            <constraint firstItem="DMY-ha-E2d" firstAttribute="centerX" secondItem="6Up-9D-nBV" secondAttribute="centerX" id="Nof-Cw-J0Z"/>
+                            <constraint firstItem="y15-iu-T0f" firstAttribute="trailing" secondItem="SS9-6Z-xxo" secondAttribute="trailing" constant="20" id="Tf1-PU-2Yd"/>
+                            <constraint firstItem="y15-iu-T0f" firstAttribute="bottom" secondItem="SS9-6Z-xxo" secondAttribute="bottom" constant="200" id="Zly-LF-ko5"/>
+                            <constraint firstItem="SS9-6Z-xxo" firstAttribute="top" secondItem="y15-iu-T0f" secondAttribute="top" constant="230" id="iyp-PY-YLl"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="collectionView" destination="SS9-6Z-xxo" id="3Gp-TO-YHN"/>
                         <outlet property="pageControl" destination="DMY-ha-E2d" id="zv0-xS-xbm"/>
-                        <outlet property="scrollView" destination="eTB-ou-o9Y" id="mzE-5V-uFK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L20-JP-pb5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

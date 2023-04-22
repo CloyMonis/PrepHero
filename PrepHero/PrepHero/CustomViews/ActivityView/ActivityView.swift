@@ -13,6 +13,3 @@ class ActivityView: UIView {
     @IBOutlet weak var labelHeading: UILabel!
     @IBOutlet weak var labelSubHeading: UILabel!
 }
-
-
-

@@ -18,12 +18,32 @@ class SelectActivityLevelViewController: UIViewController {
     var skipButton: UIButton?
     var signUpResult = SignUpResult()
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
-    var activityViews: [ActivityView] = []
+    var images = ["Activity1","Activity2","Activity3","Activity4","Activity5"]
+    var headers = ["Sedentary","Light","Moderate","Vigerous","Very Vigerous"]
+    var subHeaders = ["I usually not moving around. Working at a desk", "I usually do some yoga, work around house, take out the rubbish...", "Walking, cycling and even shopping around.", "Playing football, dancing, swimming.", "Sprinting up hill, weight exercises, press ups."]
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // UPDATE VIEW'S
         setUpViews()
         setUpPageView()
+        
+        // REGISTER XIB's
+        registerXIBs()
+        
+        // RELOAD COLLECTION VIEW
+        let collectionViewLayout: CenterCellCollectionViewFlowLayout = CenterCellCollectionViewFlowLayout()
+        collectionViewLayout.itemSize = CGSize(width: 310, height: 390)
+        collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        collectionViewLayout.minimumInteritemSpacing = 0
+        collectionViewLayout.minimumLineSpacing = 0
+        collectionViewLayout.scrollDirection = UICollectionView.ScrollDirection.horizontal
+        
+        collectionView.collectionViewLayout = collectionViewLayout
+        collectionView.reloadData()
+        
     }
     @objc func actionNext() {
         if let nextVC = viewControllerPresenter.getNextViewController(current: self, nextVC: SelectLocationViewController.self) as? SelectLocationViewController {
@@ -51,15 +71,87 @@ extension SelectActivityLevelViewController {
         previousButton?.addTarget(self, action: #selector(actionPrevious), for: .touchUpInside)
         nextButton?.addTarget(self, action: #selector(actionNext), for: .touchUpInside)
     }
+    func setUpPageView() {
+        pageControl.numberOfPages = images.count
+        pageControl.currentPage = 0
+        view.bringSubviewToFront(pageControl)
+        pageControl.pageIndicatorTintColor = UIColor(hex: "#DADADA")
+        pageControl.currentPageIndicatorTintColor = UIColor(hex: "#FAA21C")
+    }
 }
 
 extension SelectActivityLevelViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let pageIndex = round(scrollView.contentOffset.x/view.frame.width)
+        let pageIndex = round(scrollView.contentOffset.x / 310)
         pageControl.currentPage = Int(pageIndex)
     }
 }
 
+extension SelectActivityLevelViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func registerXIBs () {
+        collectionView.register(UINib(nibName: "ActivityViewCell", bundle: nil), forCellWithReuseIdentifier: ActivityViewCell.getCellName())
+    }
+    func addActivityLevel(color: UIColor) -> UIImageView {
+        let image = UIImage(named: "fire")
+        let imageView = UIImageView(image: image)
+        imageView.tintColor = color
+        return imageView
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return images.count
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ActivityViewCell.getCellName(), for: indexPath) as? ActivityViewCell {
+            cell.imgView.image = UIImage(named: images[indexPath.row])
+            cell.headerLbl.text = headers[indexPath.row]
+            cell.subHeaderLbl.text = subHeaders[indexPath.row]
+            let grayColor = UIColor(hex: "#DADADA") ?? UIColor.gray
+            let orangeColor = UIColor(hex: "#FAA21C") ?? UIColor.orange
+            cell.activityLevel.removeAllArrangedSubviews()
+            if indexPath.row == 0 {
+                cell.activityLevel.addArrangedSubview(addActivityLevel(color: grayColor))
+                cell.activityLevel.addArrangedSubview(addActivityLevel(color: grayColor))
+                cell.activityLevel.addArrangedSubview(addActivityLevel(color: grayColor))
+                cell.activityLevel.addArrangedSubview(addActivityLevel(color: grayColor))
+            }
+            if indexPath.row == 1 {
+                cell.activityLevel.addArrangedSubview(addActivityLevel(color: orangeColor))
+                cell.activityLevel.addArrangedSubview(addActivityLevel(color: grayColor))
+                cell.activityLevel.addArrangedSubview(addActivityLevel(color: grayColor))
+                cell.activityLevel.addArrangedSubview(addActivityLevel(color: grayColor))
+            }
+            if indexPath.row == 2 {
+                cell.activityLevel.addArrangedSubview(addActivityLevel(color: orangeColor))
+                cell.activityLevel.addArrangedSubview(addActivityLevel(color: orangeColor))
+                cell.activityLevel.addArrangedSubview(addActivityLevel(color: grayColor))
+                cell.activityLevel.addArrangedSubview(addActivityLevel(color: grayColor))
+            }
+            if indexPath.row == 3 {
+                cell.activityLevel.addArrangedSubview(addActivityLevel(color: orangeColor))
+                cell.activityLevel.addArrangedSubview(addActivityLevel(color: orangeColor))
+                cell.activityLevel.addArrangedSubview(addActivityLevel(color: orangeColor))
+                cell.activityLevel.addArrangedSubview(addActivityLevel(color: grayColor))
+            }
+            if indexPath.row == 4 {
+                cell.activityLevel.addArrangedSubview(addActivityLevel(color: orangeColor))
+                cell.activityLevel.addArrangedSubview(addActivityLevel(color: orangeColor))
+                cell.activityLevel.addArrangedSubview(addActivityLevel(color: orangeColor))
+                cell.activityLevel.addArrangedSubview(addActivityLevel(color: orangeColor))
+            }
+            return cell
+        }
+        return UICollectionViewCell()
+    }
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+    }
+    func selectItem(index: Int) {
+    }
+}
+/*
 extension SelectActivityLevelViewController {
     func setUpPageView() {
         scrollView.delegate = self
@@ -139,3 +231,4 @@ extension SelectActivityLevelViewController {
         }
     }
 }
+*/
