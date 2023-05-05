@@ -26,16 +26,16 @@ class SelectActivityLevelViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // REGISTER XIB's
+        registerXIBs()
+        
         // UPDATE VIEW'S
         setUpViews()
         setUpPageView()
         
-        // REGISTER XIB's
-        registerXIBs()
-        
         // RELOAD COLLECTION VIEW
         let collectionViewLayout: CenterCellCollectionViewFlowLayout = CenterCellCollectionViewFlowLayout()
-        collectionViewLayout.itemSize = CGSize(width: 310, height: 390)
+        collectionViewLayout.itemSize = CGSize(width: 310, height: 310)
         collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         collectionViewLayout.minimumInteritemSpacing = 0
         collectionViewLayout.minimumLineSpacing = 0
@@ -141,9 +141,6 @@ extension SelectActivityLevelViewController: UICollectionViewDelegate, UICollect
             return cell
         }
         return UICollectionViewCell()
-    }
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)

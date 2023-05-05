@@ -25,6 +25,7 @@ class CustomViewFactory {
         return button
     }
     func getProcessAndSkip(view: UIView, currentStep: Int,totalSteps: Int) -> (UIStackView, UIButton) {
+        view.layoutIfNeeded()
         let stackView = getProcess(view: view, currentStep: currentStep, totalSteps: totalSteps)
         stackView.frame = CGRect(x: 20, y: 80, width: view.frame.width - 100 , height: 40)
         let skipButton = getSkipButton(view: view)
@@ -71,23 +72,26 @@ class CustomViewFactory {
         }
         label.text = text
     }
-    func getHeading(view: UIView) -> UILabel {
+    func getHeading(view: UIView, frame: CGRect = CGRect(x: 20, y: 100, width: UIScreen.main.bounds.width - 20, height: 100)) -> UILabel {
+        view.layoutIfNeeded()
         let label = UILabel()
         if let poppinsBold = UIFont(name: CustomFonts.bold.rawValue, size: 25) {
             label.font = UIFontMetrics.default.scaledFont(for: poppinsBold)
             label.adjustsFontForContentSizeCategory = true
         }
-        label.frame = CGRect(x: 20, y: 100, width: view.frame.width , height: 100)
+        label.frame = frame
+        label.numberOfLines = 0
         view.addSubview(label)
         return label
     }
-    func getSubHeading(view: UIView) -> UILabel {
+    func getSubHeading(view: UIView, frame: CGRect = CGRect(x: 20, y: 160, width: UIScreen.main.bounds.width - 20, height: 100)) -> UILabel {
+        view.layoutIfNeeded()
         let label = UILabel()
         if let font = UIFont(name: CustomFonts.regular.rawValue, size: 17) {
             label.font = UIFontMetrics.default.scaledFont(for: font)
             label.adjustsFontForContentSizeCategory = true
         }
-        label.frame = CGRect(x: 20, y: 160, width: view.frame.width - 20 , height: 100)
+        label.frame = frame
         label.numberOfLines = 0
         view.addSubview(label)
         return label
@@ -105,6 +109,7 @@ class CustomViewFactory {
         return button
     }
     func getPreviousButton(view: UIView) -> UIButton {
+        view.layoutIfNeeded()
         let button = UIButton()
         button.backgroundColor = UIColor(hex: "#F2F2F2")
         button.setTitle("Previous", for: .normal)
@@ -112,11 +117,12 @@ class CustomViewFactory {
         if let poppinsBold = UIFont(name: CustomFonts.bold.rawValue, size: 20) {
             button.titleLabel?.font = poppinsBold
         }
-        button.frame = CGRect(x: 30, y: view.frame.height - 120, width: 150 , height: 60)
+        button.frame = CGRect(x: 30, y: view.frame.height - 80, width: 150 , height: 60)
         view.addSubview(button)
         return button
     }
     func getNextButton(view: UIView) -> UIButton {
+        view.layoutIfNeeded()
         let button = UIButton()
         button.backgroundColor = UIColor(hex: "#E3185E")
         button.setTitle("Next", for: .normal)
@@ -124,7 +130,7 @@ class CustomViewFactory {
         if let poppinsBold = UIFont(name: CustomFonts.bold.rawValue, size: 20) {
             button.titleLabel?.font = poppinsBold
         }
-        button.frame = CGRect(x: view.frame.width - 180, y: view.frame.height - 120, width: 150 , height: 60)
+        button.frame = CGRect(x: view.frame.width - 180, y: view.frame.height - 80, width: 150 , height: 60)
         view.addSubview(button)
         return button
     }

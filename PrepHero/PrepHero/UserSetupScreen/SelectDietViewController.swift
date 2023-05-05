@@ -64,7 +64,7 @@ extension SelectDietViewController {
         skipButton = stackAndSkip.1
         heading = viewFactory.getHeading(view: view)
         heading?.text = PageHeadings.diet.rawValue
-        subHeading = viewFactory.getSubHeading(view: view)
+        subHeading = viewFactory.getSubHeading(view: view, frame: CGRect(x: 20, y: 180, width: view.frame.width - 20 , height: 100))
         subHeading?.text = PageSubHeading.diet.rawValue
         previousButton = viewFactory.getPreviousButton(view: view)
         nextButton = viewFactory.getNextButton(view: view)
